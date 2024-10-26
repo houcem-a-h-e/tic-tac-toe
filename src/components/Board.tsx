@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Square from './Square';
 import Button from './Button';
+import Modal from './Modal';
 
 type Player = 'X' | 'O';
 type BoardState = (Player | null)[];
@@ -81,15 +82,30 @@ const Board: React.FC = () => {
     setWinner(null);
     setWins({ X: 0, O: 0 });
   };
+  const handleCloseModal = () => {
+    setGameOver(false);
+    setWinner(null);
+    restartGame();
+  };
   return (
+    <>
     <div className="grid grid-cols-3 gap-2">
       {board.map((cell, index) => (
         <Square key={index} value={cell} onClick={() => handleCellClick(index)} />
       ))}
-       <Button onClick={resetScores} className="bg-[#03045e] hover:bg-peach-500 mt-4 text-white">
+       
+    </div>
+    <div className="mb-4 text-lg">
+        <p className="font-semibold">Player X Wins: {wins.X}</p>
+        <p className="font-semibold">Player O Wins: {wins.O}</p>
+      </div>
+      <Button onClick={resetScores} className="bg-[#03045e] hover:bg-peach-500 mt-4 text-white">
         Reset Game Score
       </Button>
-    </div>
+       {gameOver && (
+        <Modal onClose={handleCloseModal} message={winner ? `${winner} Wins!` : 'It\'s a Draw!'} />
+      )}
+      </>
     
   );
 };
