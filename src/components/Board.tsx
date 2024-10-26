@@ -1,6 +1,7 @@
 // src/Board.tsx
 import React, { useState } from 'react';
 import Square from './Square';
+import Button from './Button';
 
 type Player = 'X' | 'O';
 type BoardState = (Player | null)[];
@@ -51,12 +52,29 @@ const Board: React.FC = () => {
     return false;
   };
 
+    const restartGame = () => {
+    setBoard(Array(9).fill(null));
+    setIsXNext(true);
+    setGameOver(false);
+    setWinner(null);
+  };
+  const resetScores = () => {
+    setBoard(Array(9).fill(null));
+    setIsXNext(true);
+    setGameOver(false);
+    setWinner(null);
+    setWins({ X: 0, O: 0 });
+  };
   return (
     <div className="grid grid-cols-3 gap-2">
       {board.map((cell, index) => (
         <Square key={index} value={cell} onClick={() => handleCellClick(index)} />
       ))}
+       <Button onClick={resetScores} className="bg-[#03045e] hover:bg-peach-500 mt-4 text-white">
+        Reset Game Score
+      </Button>
     </div>
+    
   );
 };
 
