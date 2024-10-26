@@ -2,18 +2,53 @@
 import React, { useState } from 'react';
 import Square from './Square';
 
+type Player = 'X' | 'O';
+type BoardState = (Player | null)[];
 const Board: React.FC = () => {
-  // Explicitly define board state type
-  const [board, setBoard] = useState<(null | 'X' | 'O')[]>(Array(9).fill(null));
+ const [board, setBoard] = useState<BoardState>(Array(9).fill(null));
+  const [isXNext, setIsXNext] = useState<boolean>(true);
+  const [wins, setWins] = useState<{ X: number; O: number }>({ X: 0, O: 0 });
+  const [gameOver, setGameOver] = useState<boolean>(false);
+  const [winner, setWinner] = useState<Player | null>(null);
 
-  const handleCellClick = (index: number) => {
-    // Only allow setting a value if the cell is empty
-    if (board[index] === null) {
-      const newBoard = [...board];
-      newBoard[index] = 'X'; // Example: setting clicked cell to 'X'
-      setBoard(newBoard);
+   const handleCellClick = (index: number) => {
+    if (board[index] || gameOver) return;
+
+    const newBoard = board.slice();
+    newBoard[index] = isXNext ? 'X' : 'O';
+    setBoard(newBoard);
+
+    if (checkWinner(newBoard)) return;
+
+    if (!newBoard.includes(null)) {
+      setGameOver(true);
+      return;
     }
-    console.log("the number is ",index)
+
+    setIsXNext(!isXNext);
+  };
+
+  const checkWinner = (board: BoardState): boolean => {
+    const lines = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6],
+    ];
+
+    for (let line of lines) {
+      const [a, b, c] = line;
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        setWinner(board[a] as Player);
+        console.log("winner is ",board[a])
+        setGameOver(true);
+        setWins(prev => ({
+          ...prev,
+          [board[a] as Player]: prev[board[a] as Player] + 1,
+        }));
+        return true;
+      }
+    }
+    return false;
   };
 
   return (
