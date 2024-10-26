@@ -10,6 +10,7 @@ const Board: React.FC = () => {
  const [board, setBoard] = useState<BoardState>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState<boolean>(true);
   const [wins, setWins] = useState<{ X: number; O: number }>({ X: 0, O: 0 });
+  const [gameMode, setGameMode] = useState<'player' | 'computer'>('player');
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [winner, setWinner] = useState<Player | null>(null);
 
@@ -28,6 +29,9 @@ const Board: React.FC = () => {
     }
 
     setIsXNext(!isXNext);
+    if (gameMode === 'computer' && !gameOver) {
+      computerMove(newBoard);
+    }
   };
 
   const checkWinner = (board: BoardState): boolean => {
@@ -87,8 +91,22 @@ const Board: React.FC = () => {
     setWinner(null);
     restartGame();
   };
+   const handleModeChange = (mode: 'player' | 'computer') => {
+    if (mode !== gameMode) {
+      setGameMode(mode);
+      restartGame();
+    }
+  };
   return (
     <>
+     <div className="mb-4 flex justify-center space-x-2">
+        <Button onClick={() => handleModeChange('player')} className={`bg-[#0077b6] ${gameMode === 'player' ? 'ring-2 ring-blue-200' : ''}`}>
+          2 Players
+        </Button>
+        <Button onClick={() => handleModeChange('computer')} className={`bg-[#00b4d8] ${gameMode === 'computer' ? 'ring-2 ring-green-200' : ''}`}>
+          VS Computer
+        </Button>
+      </div>
     <div className="grid grid-cols-3 gap-2">
       {board.map((cell, index) => (
         <Square key={index} value={cell} onClick={() => handleCellClick(index)} />
