@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# Tic Tac Toe Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+This is a simple Tic Tac Toe game built with React. It allows two players to compete against each other or play against a computer. The application keeps track of wins for both players and provides an option to reset the score.
 
-## Available Scripts
+## Features
+- **Two Player Mode**: Play against another person.
+- **Computer Mode**: Play against a simple AI.
+- **Win Counter**: Displays the number of wins for each player.
+- **Score Reset**: Reset scores to zero for both players.
 
-In the project directory, you can run:
+## Technologies Used
+- React
+- TypeScript
+- Tailwind CSS (for styling)
+- React Icons (for UI icons)
 
-### `npm start`
+## Installation
+1. Clone the repository:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   git clone https://github.com/houcem-a-h-e/tic-tac-toe
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Navigate to the project directory:
 
-### `npm test`
+cd tic-tac-toe
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Install the dependencies:
 
-### `npm run build`
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Start the application:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Usage:
 
-### `npm run eject`
+Select the game mode (2 Players or VS Computer).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Click on the squares to make your move.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application will announce the winner or a draw.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Use the reset button to reset scores.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Contributing:
 
-## Learn More
+Feel free to fork the repository and submit pull requests for any improvements.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+License
+This project is licensed under the MIT License.
