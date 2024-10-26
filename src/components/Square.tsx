@@ -1,5 +1,5 @@
 interface SquareProps {
-    value: 'X' | 'O' | 'null';
+    value: 'X' | 'O' | null;
     onClick: () => void;
 }
 
