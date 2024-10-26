@@ -52,6 +52,22 @@ const Board: React.FC = () => {
     return false;
   };
 
+    const computerMove = (currentBoard: BoardState) => {
+    const emptyCells = currentBoard.map((cell, index) => (cell === null ? index : null)).filter((v) => v !== null);
+    if (emptyCells.length === 0) return;
+
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+    const move = emptyCells[randomIndex] as number;
+
+    currentBoard[move] = 'O';
+    setBoard([...currentBoard]);
+
+    if (!checkWinner(currentBoard) && !currentBoard.includes(null)) {
+      setGameOver(true);
+    } else {
+      setIsXNext(true);
+    }
+  };
     const restartGame = () => {
     setBoard(Array(9).fill(null));
     setIsXNext(true);
